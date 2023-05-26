@@ -101,7 +101,7 @@ resource "aws_ecs_cluster" "this" {
   name = "${var.prefix}-${var.environment}"
 }
 
-resource "aws_security_group" "wordpress" {
+/* resource "aws_security_group" "wordpress" {
   name        = "${var.prefix}-wordpress-${var.environment}"
   description = "Fargate wordpress"
   vpc_id      = module.vpc.vpc_id
@@ -121,7 +121,7 @@ resource "aws_security_group" "wordpress" {
   }
 
   tags = var.tags
-}
+} */
 
 resource "aws_ecs_service" "this" {
   name             = "${var.prefix}-${var.environment}"
