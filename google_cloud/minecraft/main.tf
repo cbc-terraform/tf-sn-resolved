@@ -77,7 +77,7 @@ resource "google_compute_address" "minecraft" {
   region = local.region
 }
 
-# VM to run Minecraft, we use preemptable which will shutdown within 24 hours
+# deleted for testing
 
 
 # Create a private network so the minecraft instance cannot access
