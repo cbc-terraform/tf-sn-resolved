@@ -123,29 +123,7 @@ resource "aws_ecs_cluster" "this" {
   tags = var.tags
 } */
 
-resource "aws_ecs_service" "this" {
-  name             = "${var.prefix}-${var.environment}"
-  cluster          = aws_ecs_cluster.this.id
-  task_definition  = aws_ecs_task_definition.this.arn
-  desired_count    = var.desired_count
-  launch_type      = "FARGATE"
-  platform_version = "1.4.0" // required for mounting efs
-  network_configuration {
-    security_groups = [aws_security_group.alb.id, aws_security_group.db.id, aws_security_group.efs.id]
-    subnets         = module.vpc.private_subnets
-  }
 
-  load_balancer {
-    target_group_arn = aws_lb_target_group.this.id
-    container_name   = "wordpress"
-    container_port   = 80
-  }
-
-  lifecycle {
-    ignore_changes = [desired_count]
-  }
-
-}
 
 
 resource "aws_ecs_task_definition" "this" {
