@@ -49,6 +49,12 @@ resource "azurerm_storage_account" "storage" {
   account_tier              = "Standard"
   account_replication_type  = "LRS"
   enable_https_traffic_only = true
+name                      = "${var.resource_name_prefix}storage"
+  resource_group_name       = azurerm_resource_group.storage.name
+  location                  = var.location
+  account_tier              = "Standard"
+  account_replication_type  = "LRS"
+  enable_https_traffic_only = true
 }
 
 resource "azurerm_storage_container" "storage" {
