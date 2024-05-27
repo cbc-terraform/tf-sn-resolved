@@ -5,6 +5,29 @@ resource "random_string" "suffix" {
   special = false
   upper   = false
 }
+resource "aws_iam_policy" "task_execution_policy" {
+  policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "ecr:GetAuthorizationToken",
+        "ecr:BatchCheckLayerAvailability",
+        "ecr:GetDownloadUrlForLayer",
+        "ecr:BatchGetImage",
+        "logs:CreateLogStream",
+        "logs:PutLogEvents",
+        "ssm:GetParameters",
+        "kms:Decrypt"
+      ],
+      "Resource": "*"
+    }
+  ]
+  }
+EOF
+}
 
 locals {
   # Key vault and ACR required globally unique names. Only alphanumeric characters allowed
